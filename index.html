@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AUREA • The Atelier of Legacy</title>
+<link href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:opsz,wght@6..96,100;6..96,200;6..96,400;6..96,700&family=Cormorant+Garamond:ital,wght@0,300;1,300&family=Instrument+Serif:ital@0;1&family=Inter:wght@200;300;400&display=swap" rel="stylesheet">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/0.160.0/three.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+<style>
+*{margin:0;padding:0;box-sizing:border-box}:root{--black:#06060A;--gold:#D8C08E;--cream:#F5F1E8}
+body{background:#06060A;color:#F5F1E8;font-family:'Inter',sans-serif;overflow-x:hidden;cursor:none}
+#canvas{position:fixed;inset:0;z-index:1}.vignette{position:fixed;inset:0;z-index:2;pointer-events:none;background:radial-gradient(80% 60% at 50% 40%, transparent 60%, rgba(6,6,10,.8) 100%)}
+.loader{position:fixed;inset:0;z-index:100;background:#06060A;display:flex;flex-direction:column;justify-content:center;align-items:center;transition:transform 1.4s cubic-bezier(.9,0,.1,1)}.loader.hide{transform:translateY(-100%)}
+.loader-logo{font-family:'Bodoni Moda';font-size:18px;letter-spacing:18px;font-weight:100;opacity:0}.loader-line{width:0%;height:1px;background:#D8C08E;margin:30px 0}.loader-pct{font-family:'Instrument Serif';font-size:12px;letter-spacing:6px;color:#D8C08E;opacity:.6}
+nav{position:fixed;top:0;width:100%;z-index:20;padding:24px 40px;display:flex;justify-content:space-between;align-items:center;border-bottom:1px solid rgba(216,192,142,.08);background:rgba(6,6,10,.6);backdrop-filter:blur(24px)}
+.logo{font-family:'Bodoni Moda';font-size:24px;letter-spacing:12px;font-weight:100}.btn-enquire{border:1px solid #D8C08E;padding:0 0 0 28px;height:44px;display:flex;align-items:center;gap:20px;font-size:10px;letter-spacing:4px;text-transform:uppercase;color:#D8C08E;background:transparent;cursor:pointer}.btn-enquire.arrow{width:44px;height:44px;background:#D8C08E;color:#000;display:flex;align-items:center;justify-content:center}
+.hero{position:relative;z-index:5;min-height:100vh;display:flex;align-items:center;justify-content:center;text-align:center;padding:120px 40px}.h1{font-family:'Bodoni Moda';font-size:clamp(44px,7vw,84px);line-height:.9;font-weight:100}.h1 em{font-family:'Cormorant Garamond';font-style:italic;color:#D8C08E}
+.side{position:fixed;top:50%;transform:translateY(-50%);font-size:9px;letter-spacing:7px;text-transform:uppercase;color:rgba(245,241,232,.25);writing-mode:vertical-rl;z-index:10}
+.side.l{left:24px}.side.r{right:24px}
+.scroll{position:absolute;bottom:40px;left:50%;transform:translateX(-50%);display:flex;flex-direction:column;align-items:center;gap:16px}.scroll-line{width:1px;height:80px;background:linear-gradient(to bottom, #D8C08E, transparent);animation:scl 2.2s infinite}
+@keyframes scl{0%{transform:scaleY(0)}50%{transform:scaleY(1)}100%{transform:scaleY(0)}}
+.phases{position:relative;z-index:4}.phase{height:110vh;display:flex;align-items:flex-end;padding:80px 60px}.phase-h{font-family:'Bodoni Moda';font-size:clamp(36px,4.5vw,64px);font-weight:100}.phase-h i{font-family:'Instrument Serif';font-style:italic;color:#D8C08E}
+.dots{position:fixed;right:36px;top:50%;transform:translateY(-50%);z-index:15;display:flex;flex-direction:column;gap:18px}.dot{width:1px;height:24px;background:rgba(216,192,142,.15)}.dot.active{height:48px;background:#D8C08E;box-shadow:0 0 20px #D8C08E}
+.bottom{position:fixed;bottom:0;width:100%;z-index:12;padding:16px 40px;display:flex;justify-content:space-between;border-top:1px solid rgba(216,192,142,.08);background:rgba(6,6,10,.85);font-size:9px;letter-spacing:5px;text-transform:uppercase}.pct{font-family:'Bodoni Moda';font-size:32px;color:#D8C08E}
+</style>
+</head>
+<body>
+<div class="vignette"></div><canvas id="canvas"></canvas>
+<div class="loader" id="loader"><div class="loader-logo" id="llogo">AUREA •</div><div class="loader-line" id="lline"></div><div class="loader-pct" id="lpct">0% — CRAFTING LEGACY</div></div>
+<div class="side l">ARCHITECTURE • CRAFTSMANSHIP • LEGACY</div>
+<div class="side r">SCROLL TO WITNESS THE RISE — AUREA</div>
+<nav><div class="logo">AUREA<b>.</b></div><button class="btn-enquire"><span>ENQUIRE</span><span class="arrow">↗</span></button></nav>
+<section class="hero"><div><h1 class="h1">We don't build<br>houses.<br><em>We build legacies.</em></h1><div class="scroll"><span>The Experience Begins</span><div class="scroll-line"></div></div></div></section>
+<div class="phases">
+<div class="phase"><div><div style="font-size:10px;letter-spacing:5px;color:#D8C08E;margin-bottom:12px">Phase 01 — Groundwork</div><div class="phase-h">The <i>Foundation</i></div></div></div>
+<div class="phase"><div><div style="font-size:10px;letter-spacing:5px;color:#D8C08E;margin-bottom:12px">Phase 02 — Skeleton</div><div class="phase-h">The <i>Structure</i></div></div></div>
+<div class="phase"><div><div style="font-size:10px;letter-spacing:5px;color:#D8C08E;margin-bottom:12px">Phase 03 — Enclosure</div><div class="phase-h">Walls <i>Rise</i></div></div></div>
+<div class="phase"><div><div style="font-size:10px;letter-spacing:5px;color:#D8C08E;margin-bottom:12px">Phase 04 — Soul</div><div class="phase-h">Light <i>Enters</i></div></div></div>
+<div class="phase"><div><div style="font-size:10px;letter-spacing:5px;color:#D8C08E;margin-bottom:12px">Phase 05 — Legacy</div><div class="phase-h">The <i>Crown</i></div></div></div>
+</div>
+<div class="dots" id="dots"></div>
+<div class="bottom"><span>Build Sequence • Aurea Atelier</span><div class="pct" id="pct">0%</div></div>
+<script>
+// Full JS with crane + dust + blueprint grid
+gsap.registerPlugin(ScrollTrigger);
+let p=0;let int=setInterval(()=>{p+=Math.random()*8+2;if(p>=100){p=100;clearInterval(int);setTimeout(()=>{document.getElementById('loader').classList.add('hide');},600);}document.getElementById('lline').style.width=(p*2)+'px';document.getElementById('lpct').innerText=Math.floor(p)+'% — CRAFTING LEGACY';},80);
+const dotsEl=document.getElementById('dots');for(let i=0;i<5;i++){const d=document.createElement('div');d.className='dot'+(i===0?' active':'');dotsEl.appendChild(d);}
+const canvas=document.getElementById('canvas');const scene=new THREE.Scene();scene.fog=new THREE.Fog(0x06060A,14,32);
+const camera=new THREE.PerspectiveCamera(32,innerWidth/innerHeight,0.1,100);camera.position.set(7,5.5,8);
+const renderer=new THREE.WebGLRenderer({canvas,antialias:true,alpha:true});renderer.setSize(innerWidth,innerHeight);renderer.setPixelRatio(Math.min(devicePixelRatio,2));
+scene.add(new THREE.AmbientLight(0xffffff,0.35));
+const sun=new THREE.DirectionalLight(0xFFF2CC,1.6);sun.position.set(6,12,5);sun.castShadow=true;scene.add(sun);
+const gridHelper=new THREE.GridHelper(40,40,0x1C2A4A,0x111A2E);gridHelper.position.y=-0.81;scene.add(gridHelper);
+const gridFloor=new THREE.Mesh(new THREE.PlaneGeometry(40,40),new THREE.MeshStandardMaterial({color:0x0B1020}));gridFloor.rotation.x=-Math.PI/2;gridFloor.position.y=-0.82;scene.add(gridFloor);
+const house=new THREE.Group();scene.add(house);
+const stone=new THREE.MeshStandardMaterial({color:0xE8E1CE});const brass=new THREE.MeshStandardMaterial({color:0xD8C08E,metalness:0.92});const glass=new THREE.MeshPhysicalMaterial({color:0xD8C08E,transparent:true,opacity:0.48});const floorMat=new THREE.MeshStandardMaterial({color:0x2A2216});
+function addPart(geo,mat,pos){const m=new THREE.Mesh(geo,mat);m.position.copy(pos);m.castShadow=true;m.scale.y=0.001;m.userData.oy=pos.y;house.add(m);return m;}
+const parts=[];parts.push(addPart(new THREE.BoxGeometry(4,0.2,3),brass,new THREE.Vector3(0,-0.6,0)));parts.push(addPart(new THREE.BoxGeometry(3.6,0.14,2.6),new THREE.MeshStandardMaterial({color:0xCBBE9F}),new THREE.Vector3(0,-0.56,0)));parts.push(addPart(new THREE.BoxGeometry(3.4,0.09,2.4),floorMat,new THREE.Vector3(0,-0.42,0)));parts.push(addPart(new THREE.BoxGeometry(0.11,1.7,2.4),stone,new THREE.Vector3(-1.645,0.45,0)));parts.push(addPart(new THREE.BoxGeometry(0.11,1.7,2.4),stone,new THREE.Vector3(1.645,0.45,0)));parts.push(addPart(new THREE.BoxGeometry(3.4,1.7,0.11),stone,new THREE.Vector3(0,0.45,-1.145)));parts.push(addPart(new THREE.CylinderGeometry(0.055,0.055,1.7,24),brass,new THREE.Vector3(1.28,0.45,0.98)));parts.push(addPart(new THREE.CylinderGeometry(0.055,0.055,1.7,24),brass,new THREE.Vector3(-1.28,0.45,0.98)));const g=addPart(new THREE.PlaneGeometry(1.42,1.1),glass,new THREE.Vector3(0,0.58,1.21));g.rotation.y=Math.PI;parts.push(g);parts.push(addPart(new THREE.BoxGeometry(3.9,0.16,3),stone,new THREE.Vector3(0,1.45,0)));
+const dustGeo=new THREE.BufferGeometry();const c=400;const pos=new Float32Array(c*3);for(let i=0;i<c*3;i++)pos[i]=(Math.random()-0.5)*20;dustGeo.setAttribute('position',new THREE.BufferAttribute(pos,3));const dust=new THREE.Points(dustGeo,new THREE.PointsMaterial({color:0xD8C08E,size:0.02,transparent:true,opacity:0.3}));scene.add(dust);
+function build(t){parts.forEach((p,i)=>{let d=i*0.065;let pp=(t-d)/0.26;pp=Math.max(0,Math.min(1,pp));pp=gsap.parseEase('power3.out')(pp);if(pp>0){p.scale.y=Math.max(0.001,pp);p.position.y=p.userData.oy-(1-pp)*1.5;}});}
+let scrollP=0;ScrollTrigger.create({trigger:'.phases',start:'top top',end:'bottom bottom',scrub:0.9,onUpdate:s=>{scrollP=s.progress;build(scrollP);document.getElementById('pct').innerText=Math.round(scrollP*100)+'%';const idx=Math.min(4,Math.floor(scrollP*5));document.querySelectorAll('.dot').forEach((d,i)=>d.classList.toggle('active',i===idx));}});
+let mx=0,my=0;window.addEventListener('mousemove',e=>{mx=(e.clientX/innerWidth-0.5);my=(e.clientY/innerHeight-0.5);});
+function loop(){requestAnimationFrame(loop);house.rotation.y=-0.55+mx*0.5+scrollP*1.1;dust.rotation.y+=0.0004;camera.position.x=7+mx*1.2;camera.lookAt(0,0.5,0);renderer.render(scene,camera);}loop();
+</script>
+</body>
+</html>
