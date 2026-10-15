@@ -2,66 +2,152 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>AUREA • The Atelier of Legacy</title>
-<link href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:opsz,wght@6..96,100;6..96,200;6..96,400;6..96,700&family=Cormorant+Garamond:ital,wght@0,300;1,300&family=Instrument+Serif:ital@0;1&family=Inter:wght@200;300;400&display=swap" rel="stylesheet">
+<title>KABIT LEGO — Creative Developer</title>
+<link href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:opsz,wght@6..96,100;6..96,300;6..96,600&family=Instrument+Serif:ital@0;1&family=Inter:wght@200;300;400;500&display=swap" rel="stylesheet">
 <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/0.160.0/three.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
 <style>
-*{margin:0;padding:0;box-sizing:border-box}:root{--black:#06060A;--gold:#D8C08E;--cream:#F5F1E8}
-body{background:#06060A;color:#F5F1E8;font-family:'Inter',sans-serif;overflow-x:hidden;cursor:none}
-#canvas{position:fixed;inset:0;z-index:1}.vignette{position:fixed;inset:0;z-index:2;pointer-events:none;background:radial-gradient(80% 60% at 50% 40%, transparent 60%, rgba(6,6,10,.8) 100%)}
-.loader{position:fixed;inset:0;z-index:100;background:#06060A;display:flex;flex-direction:column;justify-content:center;align-items:center;transition:transform 1.4s cubic-bezier(.9,0,.1,1)}.loader.hide{transform:translateY(-100%)}
-.loader-logo{font-family:'Bodoni Moda';font-size:18px;letter-spacing:18px;font-weight:100;opacity:0}.loader-line{width:0%;height:1px;background:#D8C08E;margin:30px 0}.loader-pct{font-family:'Instrument Serif';font-size:12px;letter-spacing:6px;color:#D8C08E;opacity:.6}
-nav{position:fixed;top:0;width:100%;z-index:20;padding:24px 40px;display:flex;justify-content:space-between;align-items:center;border-bottom:1px solid rgba(216,192,142,.08);background:rgba(6,6,10,.6);backdrop-filter:blur(24px)}
-.logo{font-family:'Bodoni Moda';font-size:24px;letter-spacing:12px;font-weight:100}.btn-enquire{border:1px solid #D8C08E;padding:0 0 0 28px;height:44px;display:flex;align-items:center;gap:20px;font-size:10px;letter-spacing:4px;text-transform:uppercase;color:#D8C08E;background:transparent;cursor:pointer}.btn-enquire.arrow{width:44px;height:44px;background:#D8C08E;color:#000;display:flex;align-items:center;justify-content:center}
-.hero{position:relative;z-index:5;min-height:100vh;display:flex;align-items:center;justify-content:center;text-align:center;padding:120px 40px}.h1{font-family:'Bodoni Moda';font-size:clamp(44px,7vw,84px);line-height:.9;font-weight:100}.h1 em{font-family:'Cormorant Garamond';font-style:italic;color:#D8C08E}
-.side{position:fixed;top:50%;transform:translateY(-50%);font-size:9px;letter-spacing:7px;text-transform:uppercase;color:rgba(245,241,232,.25);writing-mode:vertical-rl;z-index:10}
-.side.l{left:24px}.side.r{right:24px}
-.scroll{position:absolute;bottom:40px;left:50%;transform:translateX(-50%);display:flex;flex-direction:column;align-items:center;gap:16px}.scroll-line{width:1px;height:80px;background:linear-gradient(to bottom, #D8C08E, transparent);animation:scl 2.2s infinite}
-@keyframes scl{0%{transform:scaleY(0)}50%{transform:scaleY(1)}100%{transform:scaleY(0)}}
-.phases{position:relative;z-index:4}.phase{height:110vh;display:flex;align-items:flex-end;padding:80px 60px}.phase-h{font-family:'Bodoni Moda';font-size:clamp(36px,4.5vw,64px);font-weight:100}.phase-h i{font-family:'Instrument Serif';font-style:italic;color:#D8C08E}
-.dots{position:fixed;right:36px;top:50%;transform:translateY(-50%);z-index:15;display:flex;flex-direction:column;gap:18px}.dot{width:1px;height:24px;background:rgba(216,192,142,.15)}.dot.active{height:48px;background:#D8C08E;box-shadow:0 0 20px #D8C08E}
-.bottom{position:fixed;bottom:0;width:100%;z-index:12;padding:16px 40px;display:flex;justify-content:space-between;border-top:1px solid rgba(216,192,142,.08);background:rgba(6,6,10,.85);font-size:9px;letter-spacing:5px;text-transform:uppercase}.pct{font-family:'Bodoni Moda';font-size:32px;color:#D8C08E}
+*{margin:0;padding:0;box-sizing:border-box}
+:root{--bg:#08080B;--bg2:#101014;--gold:#D9C5A0;--cream:#F3EFE6;--line:rgba(217,197,160,.11)}
+body{background:var(--bg);color:var(--cream);font-family:'Inter',sans-serif;overflow-x:hidden}
+#webgl{position:fixed;inset:0;z-index:0;pointer-events:none}
+nav{position:fixed;top:0;width:100%;z-index:20;padding:20px 36px;display:flex;justify-content:space-between;align-items:center;border-bottom:1px solid var(--line);background:rgba(8,8,11,.75);backdrop-filter:blur(22px)}
+.logo{font-family:'Bodoni Moda';font-size:13px;letter-spacing:9px}.logo b{font-weight:600}.logo span{font-size:8.5px;letter-spacing:5px;opacity:.4;margin-left:14px}
+.btn{border:1px solid var(--gold);padding:11px 22px;font-size:9.5px;letter-spacing:4px;text-transform:uppercase;color:var(--gold);background:transparent;cursor:pointer;transition:.35s;text-decoration:none;display:inline-block}
+.btn:hover{background:var(--gold);color:#000}
+.btn.fill{background:var(--gold);color:#000}
+.hero{position:relative;z-index:5;min-height:100vh;display:grid;grid-template-columns:1.15fr .85fr;align-items:end;padding:150px 44px 64px;gap:40px}
+.kicker{font-size:9px;letter-spacing:6px;text-transform:uppercase;color:var(--gold);display:flex;align-items:center;gap:14px;margin-bottom:28px}
+.kicker::before{content:'';width:34px;height:1px;background:var(--gold)}
+.h1{font-family:'Bodoni Moda';font-size:clamp(50px,6.2vw,88px);line-height:.86;font-weight:100;letter-spacing:-1.8px;transition:color .6s}
+.h1 em{font-family:'Instrument Serif';font-style:italic;color:var(--gold);display:block}
+.h1 .line{overflow:hidden;display:block}.h1 .line span{display:block;transform:translateY(110%)}
+.sub{margin-top:30px;max-width:430px;font-size:13px;line-height:1.85;font-weight:200;opacity:.48}
+.meta{display:flex;gap:36px;margin-top:44px}
+.meta b{font-family:'Bodoni Moda';font-size:30px;font-weight:200;color:var(--gold);display:block;line-height:1}
+.meta span{font-size:8.5px;letter-spacing:4.5px;text-transform:uppercase;opacity:.35;margin-top:8px;display:block}
+.side{display:flex;flex-direction:column;gap:16px}
+.card{background:rgba(243,239,230,.04);border:1px solid var(--line);backdrop-filter:blur(18px);padding:22px}
+.card .t{font-size:8.5px;letter-spacing:5px;text-transform:uppercase;color:var(--gold);margin-bottom:12px}
+.card h4{font-family:'Bodoni Moda';font-size:18px;font-weight:300;line-height:1.2;margin-bottom:8px}
+.card p{font-size:11.5px;line-height:1.6;opacity:.38;font-weight:300}
+.sec{position:relative;z-index:4;padding:110px 44px;border-top:1px solid var(--line);background:var(--bg)}
+.label{font-size:9px;letter-spacing:6.5px;text-transform:uppercase;color:var(--gold);margin-bottom:20px}
+.h2{font-family:'Bodoni Moda';font-size:clamp(36px,4.8vw,62px);font-weight:100;line-height:.9;max-width:760px}
+.h2 i{font-family:'Instrument Serif';font-style:italic;color:var(--gold)}
+.grid{display:grid;grid-template-columns:1fr 1fr;gap:1px;background:var(--line);margin-top:70px;border:1px solid var(--line)}
+.item{background:#0E0E12;padding:28px 28px 24px;transition:.45s}
+.item:hover{background:#14141B}
+.item img{width:100%;height:220px;object-fit:cover;filter:grayscale(1) brightness(.7);transition:.6s;margin-bottom:22px;border:1px solid var(--line)}
+.item:hover img{filter:grayscale(.2) brightness(.95)}
+.num{font-size:9px;letter-spacing:5px;opacity:.25;margin-bottom:14px}
+.item h4{font-family:'Bodoni Moda';font-size:22px;font-weight:300}
+.item p{font-size:10px;letter-spacing:2px;text-transform:uppercase;opacity:.32;margin-top:10px}
+.skills{display:flex;flex-wrap:wrap;gap:10px;margin-top:50px}
+.skill{border:1px solid var(--line);padding:10px 18px;font-size:9.5px;letter-spacing:3px;text-transform:uppercase;opacity:.5}
+.contact{padding:130px 44px;text-align:center;background:radial-gradient(70% 80% at 50% 0%, rgba(217,197,160,.08), transparent), var(--bg2);border-top:1px solid var(--line);position:relative;z-index:4}
+.contact h2{font-family:'Bodoni Moda';font-size:clamp(44px,6.5vw,82px);font-weight:100;line-height:.85}
+.contact h2 i{color:var(--gold);font-family:'Instrument Serif';font-style:italic}
+.contact .row{display:flex;gap:14px;justify-content:center;margin-top:44px;flex-wrap:wrap}
+.foot{margin-top:70px;font-size:8.5px;letter-spacing:6px;text-transform:uppercase;opacity:.22}
+@media(max-width:900px){.hero{grid-template-columns:1fr;padding:110px 22px 44px}.sec,.contact{padding:80px 22px}nav{padding:16px 20px}.grid{grid-template-columns:1fr}}
 </style>
 </head>
 <body>
-<div class="vignette"></div><canvas id="canvas"></canvas>
-<div class="loader" id="loader"><div class="loader-logo" id="llogo">AUREA •</div><div class="loader-line" id="lline"></div><div class="loader-pct" id="lpct">0% — CRAFTING LEGACY</div></div>
-<div class="side l">ARCHITECTURE • CRAFTSMANSHIP • LEGACY</div>
-<div class="side r">SCROLL TO WITNESS THE RISE — AUREA</div>
-<nav><div class="logo">AUREA<b>.</b></div><button class="btn-enquire"><span>ENQUIRE</span><span class="arrow">↗</span></button></nav>
-<section class="hero"><div><h1 class="h1">We don't build<br>houses.<br><em>We build legacies.</em></h1><div class="scroll"><span>The Experience Begins</span><div class="scroll-line"></div></div></div></section>
-<div class="phases">
-<div class="phase"><div><div style="font-size:10px;letter-spacing:5px;color:#D8C08E;margin-bottom:12px">Phase 01 — Groundwork</div><div class="phase-h">The <i>Foundation</i></div></div></div>
-<div class="phase"><div><div style="font-size:10px;letter-spacing:5px;color:#D8C08E;margin-bottom:12px">Phase 02 — Skeleton</div><div class="phase-h">The <i>Structure</i></div></div></div>
-<div class="phase"><div><div style="font-size:10px;letter-spacing:5px;color:#D8C08E;margin-bottom:12px">Phase 03 — Enclosure</div><div class="phase-h">Walls <i>Rise</i></div></div></div>
-<div class="phase"><div><div style="font-size:10px;letter-spacing:5px;color:#D8C08E;margin-bottom:12px">Phase 04 — Soul</div><div class="phase-h">Light <i>Enters</i></div></div></div>
-<div class="phase"><div><div style="font-size:10px;letter-spacing:5px;color:#D8C08E;margin-bottom:12px">Phase 05 — Legacy</div><div class="phase-h">The <i>Crown</i></div></div></div>
+<canvas id="webgl"></canvas>
+<nav>
+<div class="logo"><b>KABIT LEGO</b><span>CREATIVE DEVELOPER</span></div>
+<div><a class="btn" href="mailto:kabitlego0@gmail.com">kabitlego0@gmail.com</a><a class="btn fill" href="https://wa.me/918131861802" target="_blank">WhatsApp</a></div>
+</nav>
+<section class="hero">
+<div>
+<div class="kicker">Shillong / Guwahati — Available for Intern & Junior Roles</div>
+<h1 class="h1"><span class="line"><span>Kabit builds</span></span><span class="line"><span>digital</span></span><em class="line"><span>legacies.</span></em></h1>
+<p class="sub">I design and build luxury web experiences with Three.js + GSAP. Focused on timeless typography, 3D storytelling, and high-end interactions — the same stack used by Apple, AUREA, and modern ateliers. 17, building from Northeast India.</p>
+<div class="meta"><div><b>06+</b><span>Luxury Builds</span></div><div><b>100%</b><span>Three.js / GSAP</span></div><div><b>01</b><span>Focus — Luxury UI</span></div></div>
 </div>
-<div class="dots" id="dots"></div>
-<div class="bottom"><span>Build Sequence • Aurea Atelier</span><div class="pct" id="pct">0%</div></div>
+<div class="side">
+<div class="card"><div class="t">Latest Build — AUREA V5 Ultra</div><h4>$100k level architecture atelier — crane lift, gold dust, blueprint grid</h4><p>Single file. Volumetric fog, construction timeline, paper texture. Built to prove senior-level craft.</p></div>
+<div class="card"><div class="t">What I Do</div><h4>Creative Frontend, 3D Web, Luxury Interaction</h4><p>Converting Figma luxury designs into real Three.js experiences. No templates. Custom code.</p></div>
+<div class="card"><div class="t">Contact</div><h4>kabitlego0@gmail.com<br>8131861802</h4><p>Response within 2 hours. Open to internships in Shillong, Guwahati, and remote.</p></div>
+</div>
+</section>
+<section class="sec">
+<div class="label">Selected Works — 2024 / 2026</div>
+<h2 class="h2">Sites that feel <i>expensive,</i> not just functional.</h2>
+<div class="grid">
+<div class="item"><div class="num">001 / AUREA V5</div><img src="https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?w=900"><h4>AUREA — Luxury Architecture Atelier</h4><p>Three.js House + Crane + GSAP Scroll — Flagship Project</p></div>
+<div class="item"><div class="num">002 / NIVARA</div><img src="https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?w=900"><h4>NIVARA — Northeast Villas Concept</h4><p>Paper Texture + Brass Detail + Fog — Regional Luxury</p></div>
+<div class="item"><div class="num">003 / PORTFOLIO</div><img src="https://images.unsplash.com/photo-1600585154340-be6161a56a0c?w=900"><h4>KABIT LEGO — Personal Atelier</h4><p>Bodoni + Cormorant + Three.js — This Site</p></div>
+<div class="item"><div class="num">004 / AMARA</div><img src="https://images.unsplash.com/photo-1600047509807-ba8f99d2cdde?w=900"><h4>Residence Amara — Geneva Concept</h4><p>Blueprint Grid + Construction Progress — Concept Build</p></div>
+</div>
+<div class="skills"><div class="skill">Three.js</div><div class="skill">GSAP ScrollTrigger</div><div class="skill">WebGL Shaders</div><div class="skill">Next.js / React</div><div class="skill">Figma to Code</div><div class="skill">Lenis Smooth Scroll</div><div class="skill">Luxury Typography</div><div class="skill">Vercel / GitHub Pages</div></div>
+</section>
+<section class="contact">
+<h2>Let's build<br><i>something timeless.</i></h2>
+<p style="margin-top:22px;opacity:.42;font-size:13.5px;max-width:460px;margin-inline:auto;line-height:1.7">17-year-old creative developer from Northeast India. I can ship AUREA-level luxury sites in 3 days. Looking for internship / junior creative frontend role.</p>
+<div class="row">
+<a class="btn fill" href="mailto:kabitlego0@gmail.com">kabitlego0@gmail.com</a>
+<a class="btn" href="https://wa.me/918131861802" target="_blank">WhatsApp — 8131861802</a>
+<a class="btn" href="tel:+918131861802">Call — 8131861802</a>
+</div>
+<div class="foot">© 2026 KABIT LEGO — CREATIVE DEVELOPER — SHILLONG / GUWAHATI • BUILDING LEGACIES, NOT JUST WEBSITES</div>
+</section>
 <script>
-// Full JS with crane + dust + blueprint grid
 gsap.registerPlugin(ScrollTrigger);
-let p=0;let int=setInterval(()=>{p+=Math.random()*8+2;if(p>=100){p=100;clearInterval(int);setTimeout(()=>{document.getElementById('loader').classList.add('hide');},600);}document.getElementById('lline').style.width=(p*2)+'px';document.getElementById('lpct').innerText=Math.floor(p)+'% — CRAFTING LEGACY';},80);
-const dotsEl=document.getElementById('dots');for(let i=0;i<5;i++){const d=document.createElement('div');d.className='dot'+(i===0?' active':'');dotsEl.appendChild(d);}
-const canvas=document.getElementById('canvas');const scene=new THREE.Scene();scene.fog=new THREE.Fog(0x06060A,14,32);
-const camera=new THREE.PerspectiveCamera(32,innerWidth/innerHeight,0.1,100);camera.position.set(7,5.5,8);
-const renderer=new THREE.WebGLRenderer({canvas,antialias:true,alpha:true});renderer.setSize(innerWidth,innerHeight);renderer.setPixelRatio(Math.min(devicePixelRatio,2));
-scene.add(new THREE.AmbientLight(0xffffff,0.35));
-const sun=new THREE.DirectionalLight(0xFFF2CC,1.6);sun.position.set(6,12,5);sun.castShadow=true;scene.add(sun);
-const gridHelper=new THREE.GridHelper(40,40,0x1C2A4A,0x111A2E);gridHelper.position.y=-0.81;scene.add(gridHelper);
-const gridFloor=new THREE.Mesh(new THREE.PlaneGeometry(40,40),new THREE.MeshStandardMaterial({color:0x0B1020}));gridFloor.rotation.x=-Math.PI/2;gridFloor.position.y=-0.82;scene.add(gridFloor);
-const house=new THREE.Group();scene.add(house);
-const stone=new THREE.MeshStandardMaterial({color:0xE8E1CE});const brass=new THREE.MeshStandardMaterial({color:0xD8C08E,metalness:0.92});const glass=new THREE.MeshPhysicalMaterial({color:0xD8C08E,transparent:true,opacity:0.48});const floorMat=new THREE.MeshStandardMaterial({color:0x2A2216});
-function addPart(geo,mat,pos){const m=new THREE.Mesh(geo,mat);m.position.copy(pos);m.castShadow=true;m.scale.y=0.001;m.userData.oy=pos.y;house.add(m);return m;}
-const parts=[];parts.push(addPart(new THREE.BoxGeometry(4,0.2,3),brass,new THREE.Vector3(0,-0.6,0)));parts.push(addPart(new THREE.BoxGeometry(3.6,0.14,2.6),new THREE.MeshStandardMaterial({color:0xCBBE9F}),new THREE.Vector3(0,-0.56,0)));parts.push(addPart(new THREE.BoxGeometry(3.4,0.09,2.4),floorMat,new THREE.Vector3(0,-0.42,0)));parts.push(addPart(new THREE.BoxGeometry(0.11,1.7,2.4),stone,new THREE.Vector3(-1.645,0.45,0)));parts.push(addPart(new THREE.BoxGeometry(0.11,1.7,2.4),stone,new THREE.Vector3(1.645,0.45,0)));parts.push(addPart(new THREE.BoxGeometry(3.4,1.7,0.11),stone,new THREE.Vector3(0,0.45,-1.145)));parts.push(addPart(new THREE.CylinderGeometry(0.055,0.055,1.7,24),brass,new THREE.Vector3(1.28,0.45,0.98)));parts.push(addPart(new THREE.CylinderGeometry(0.055,0.055,1.7,24),brass,new THREE.Vector3(-1.28,0.45,0.98)));const g=addPart(new THREE.PlaneGeometry(1.42,1.1),glass,new THREE.Vector3(0,0.58,1.21));g.rotation.y=Math.PI;parts.push(g);parts.push(addPart(new THREE.BoxGeometry(3.9,0.16,3),stone,new THREE.Vector3(0,1.45,0)));
-const dustGeo=new THREE.BufferGeometry();const c=400;const pos=new Float32Array(c*3);for(let i=0;i<c*3;i++)pos[i]=(Math.random()-0.5)*20;dustGeo.setAttribute('position',new THREE.BufferAttribute(pos,3));const dust=new THREE.Points(dustGeo,new THREE.PointsMaterial({color:0xD8C08E,size:0.02,transparent:true,opacity:0.3}));scene.add(dust);
-function build(t){parts.forEach((p,i)=>{let d=i*0.065;let pp=(t-d)/0.26;pp=Math.max(0,Math.min(1,pp));pp=gsap.parseEase('power3.out')(pp);if(pp>0){p.scale.y=Math.max(0.001,pp);p.position.y=p.userData.oy-(1-pp)*1.5;}});}
-let scrollP=0;ScrollTrigger.create({trigger:'.phases',start:'top top',end:'bottom bottom',scrub:0.9,onUpdate:s=>{scrollP=s.progress;build(scrollP);document.getElementById('pct').innerText=Math.round(scrollP*100)+'%';const idx=Math.min(4,Math.floor(scrollP*5));document.querySelectorAll('.dot').forEach((d,i)=>d.classList.toggle('active',i===idx));}});
-let mx=0,my=0;window.addEventListener('mousemove',e=>{mx=(e.clientX/innerWidth-0.5);my=(e.clientY/innerHeight-0.5);});
-function loop(){requestAnimationFrame(loop);house.rotation.y=-0.55+mx*0.5+scrollP*1.1;dust.rotation.y+=0.0004;camera.position.x=7+mx*1.2;camera.lookAt(0,0.5,0);renderer.render(scene,camera);}loop();
+gsap.to('.h1 .line span',{y:'0%',duration:1.25,stagger:0.12,ease:'power4.out',delay:0.35});
+const canvas=document.getElementById('webgl');const scene=new THREE.Scene();scene.fog=new THREE.Fog(0x08080B,13,26);
+const camera=new THREE.PerspectiveCamera(34,innerWidth/innerHeight,0.1,100);camera.position.set(5.2,3,6.2);
+const renderer=new THREE.WebGLRenderer({canvas,antialias:true,alpha:true});renderer.setSize(innerWidth,innerHeight);renderer.setPixelRatio(Math.min(devicePixelRatio,1.6));
+scene.add(new THREE.AmbientLight(0xffffff,0.42));
+const dl=new THREE.DirectionalLight(0xD9C5A0,1.15);dl.position.set(4,6,3);scene.add(dl);
+const g=new THREE.Group();scene.add(g);
+const cream=new THREE.MeshStandardMaterial({color:0xEAE3D3,roughness:0.72});const gold=new THREE.MeshStandardMaterial({color:0xD9C5A0,metalness:0.9,roughness:0.25});
+function b(geo,mat,p){const m=new THREE.Mesh(geo,mat);m.position.copy(p);g.add(m);return m;}
+b(new THREE.BoxGeometry(2.6,0.12,1.9),gold,new THREE.Vector3(0,-0.55,0));
+b(new THREE.BoxGeometry(0.09,1.25,1.7),cream,new THREE.Vector3(-1.25,0.2,0));
+b(new THREE.BoxGeometry(0.09,1.25,1.7),cream,new THREE.Vector3(1.25,0.2,0));
+b(new THREE.BoxGeometry(2.6,1.25,0.09),cream,new THREE.Vector3(0,0.2,-0.8));
+b(new THREE.BoxGeometry(2.8,0.12,2.1),cream,new THREE.Vector3(0,0.98,0));
+let mx=0;addEventListener('mousemove',e=>mx=(e.clientX/innerWidth-0.5));
+let sp=0;ScrollTrigger.create({trigger:'body',start:'top top',end:'bottom bottom',scrub:0.9,onUpdate:s=>sp=s.progress});
+// === LUXURY TRICKS BY KABIT — ADDED ===
+gsap.utils.toArray('.card').forEach((card,i)=>{
+  gsap.from(card,{
+    y:80,opacity:0,duration:1.2,ease:"power4.out",
+    scrollTrigger:{trigger:card,start:"top 85%",toggleActions:"play none none reverse"},
+    delay:i*0.1
+  })
+});
+gsap.from('.h2',{
+  y:60,opacity:0,duration:1.4,ease:"power3.out",
+  scrollTrigger:{trigger:'.h2',start:"top 80%"}
+});
+document.querySelectorAll('.btn').forEach(btn=>{
+  btn.addEventListener('mousemove',(e)=>{
+    const rect=btn.getBoundingClientRect();
+    const x=e.clientX-rect.left-rect.width/2;
+    const y=e.clientY-rect.top-rect.height/2;
+    gsap.to(btn,{x:x*0.3,y:y*0.4,duration:0.6,ease:"power3.out"});
+  });
+  btn.addEventListener('mouseleave',()=>{
+    gsap.to(btn,{x:0,y:0,duration:0.8,ease:"elastic.out(1,0.3)"});
+  });
+});
+const h1El=document.querySelector('.h1');
+h1El.addEventListener('mouseenter',()=>{gsap.to(h1El,{color:'#D9C5A0',duration:0.6})});
+h1El.addEventListener('mouseleave',()=>{gsap.to(h1El,{color:'#F3EFE6',duration:0.6})});
+gsap.utils.toArray('.item').forEach((it,i)=>{
+  gsap.from(it,{
+    y:70,opacity:0,duration:1,ease:"power3.out",
+    scrollTrigger:{trigger:it,start:"top 88%"},
+    delay:i*0.08
+  })
+});
+// === END TRICKS ===
+(function loop(){requestAnimationFrame(loop);g.rotation.y=-0.42+mx*0.55+sp*0.85;g.position.y=Math.sin(Date.now()*0.0009)*0.06;camera.lookAt(0,0.25,0);renderer.render(scene,camera);})();
+addEventListener('resize',()=>{camera.aspect=innerWidth/innerHeight;camera.updateProjectionMatrix();renderer.setSize(innerWidth,innerHeight);});
 </script>
 </body>
 </html>
