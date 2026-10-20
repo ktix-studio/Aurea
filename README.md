@@ -1,31 +1,24 @@
 # AUREA — We Craft Legacies
 
-Luxury real estate experience built with cutting-edge web tech.
+**Live:** https://aurea-pi-mocha.vercel.app
 
-Live: https://aurea-pi-mocha.vercel.app
+Luxury architecture atelier — scroll to build house in real-time.
 
-## Tech Stack
-- **Frontend:** Next.js 14, React, Three.js, GSAP + ScrollTrigger
-- **3D:** Blueprint grid, crane animation, legacy architecture visuals
-- **Backend:** Next.js API Routes + MongoDB (Mongoose)
-- **Deployment:** Vercel
+### Stack
+- Next.js 14 (App Router)
+- Three.js + GSAP ScrollTrigger (3D house build)
+- TypeScript + MongoDB (full stack)
+- Deployed on Vercel
 
-## Features
-- Immersive 3D landing
-- Contact form → Saves directly to database (Full Stack)
-- Fast, responsive, luxury UI
+### Features
+- Blueprint 3D with scroll timeline
+- Cream + Brass luxury materials
+- Progress bar + mouse parallax
+- Full-stack contact API
 
-## Full Stack API
-`POST /api/contact` — Save lead
-`GET /api/contact` — Get all leads
-
-## Setup Local
-npm install
-npm run dev
-
-## Environment
-Create `.env.local`:
-MONGODB_URI=mongodb+srv://...
+### API
+POST /api/contact - save lead
+GET /api/contact - list leads
 
 ---
-Built by ktix-studio
+Built by ktix-studio - We don't build houses, we craft legacies.
