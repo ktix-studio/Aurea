@@ -38,9 +38,3 @@ On scroll, a luxury minimalist house builds itself — foundation → walls → 
 - **Three.js r160** — Procedural box architecture
 - **GSAP 3.12 + ScrollTrigger** — Scrub-based timeline
 - **Vanilla JS + Import Maps** — No bundler needed
-
-### 📦 Installation
-
-#### Option 1: Single File (Recommended for buyers)
-```bash
-Just open index.html in browser. That's it
