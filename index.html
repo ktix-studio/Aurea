@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0"/>
+<title>AUREA — Architecture Atelier</title>
+<link href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:opsz,wght@6..96,100;6..96,600&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:#FAF6EB;color:#121212;font-family:Inter,system-ui,sans-serif;overflow-x:hidden}
+#bar{position:fixed;top:0;left:0;height:2px;background:#C8A96A;z-index:20;width:0}
+#webgl{position:fixed;inset:0;width:100%;height:100vh;z-index:0}
+nav{position:fixed;top:0;width:100%;z-index:10;padding:20px 36px;display:flex;justify-content:space-between;align-items:center;background:rgba(250,246,235,.85);backdrop-filter:blur(20px);border-bottom:1px solid rgba(200,169,106,.2)}
+.logo{font-family:'Bodoni Moda';letter-spacing:8px;font-size:11px;font-weight:600}
+.logo span{font-family:'Instrument Serif';font-style:italic;color:#C8A96A;margin-left:8px;font-size:12px}
+.btn{border:1px solid #121212;padding:10px 18px;font-size:8px;letter-spacing:4px;text-decoration:none;color:#121212}
+.hero{position:relative;z-index:2;width:100%;height:100vh;pointer-events:none}
+.hero-inner{position:absolute;left:44px;bottom:48px;max-width:480px}
+.hero h1{font-family:'Bodoni Moda';font-size:clamp(48px,6vw,78px);line-height:.85;font-weight:100}
+.hero h1 i{font-family:'Instrument Serif';font-style:italic;color:#C8A96A;display:block}
+.scroll-hint{margin-top:24px;font-size:9px;letter-spacing:5px;text-transform:uppercase;opacity:.5;display:flex;gap:10px;align-items:center}
+.scroll-hint span{width:40px;height:1px;background:#C8A96A;display:inline-block}
+.spacer{height:350vh}
+.footer{position:relative;z-index:2;background:#FAF6EB;padding:100px 44px;border-top:1px solid rgba(200,169,106,.2)}
+@media(max-width:768px){
+  nav{padding:14px 16px}
+  .logo{letter-spacing:4px;font-size:10px}
+  .logo span{font-size:10px}
+  .btn{padding:8px 12px;font-size:7px;letter-spacing:2.5px}
+  .hero-inner{left:20px;right:20px;bottom:90px}
+  .hero h1{font-size:42px}
+  .footer{padding:50px 20px}
+}
+</style>
+<script type="importmap">
+{"imports":{"three":"https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.module.js","gsap":"https://cdn.jsdelivr.net/npm/gsap@3.12.5/+esm","gsap/ScrollTrigger":"https://cdn.jsdelivr.net/npm/gsap@3.12.5/ScrollTrigger/+esm"}}
+</script>
+</head>
+<body>
+<div id="bar"></div>
+<canvas id="webgl"></canvas>
+<nav><div class="logo">A U R E A <span>Architecture Atelier</span></div><a href="#" class="btn">PORTFOLIO</a></nav>
+<div class="hero"><div class="hero-inner"><h1>We don't build<br>houses.<br><i>We craft legacies.</i></h1><div class="scroll-hint"><span></span>Scroll to build the house</div></div></div>
+<div class="spacer" id="spacer"></div>
+<div class="footer"><h2>From <i>foundation</i> to <i>roof</i> — built on scroll.</h2><p>Mobile optimized premium template.</p></div>
+<script type="module">
+import * as THREE from 'three';import gsap from 'gsap';import { ScrollTrigger } from 'gsap/ScrollTrigger';
+gsap.registerPlugin(ScrollTrigger);
+const canvas=document.getElementById('webgl');const bar=document.getElementById('bar');
+const scene=new THREE.Scene();scene.background=new THREE.Color(0xFAF6EB);
+const isMobile=window.innerWidth<768;
+const camera=new THREE.PerspectiveCamera(isMobile?50:35,window.innerWidth/window.innerHeight,0.1,100);
+if(isMobile){camera.position.set(6.2,3.5,7.2);}else{camera.position.set(5,2.6,5.2);}
+const renderer=new THREE.WebGLRenderer({canvas,antialias:true,alpha:true});
+renderer.setSize(window.innerWidth,window.innerHeight);renderer.setPixelRatio(Math.min(window.devicePixelRatio,2));
+scene.add(new THREE.AmbientLight(0xffffff,1.15));scene.add(new THREE.HemisphereLight(0xFFF8E3,0xE8D5A5,0.9));
+const sun=new THREE.DirectionalLight(0xffffff,0.9);sun.position.set(4,6,3);scene.add(sun);
+const house=new THREE.Group();if(isMobile)house.scale.set(0.72,0.72,0.72);scene.add(house);
+const cream=new THREE.MeshStandardMaterial({color:0xFFF6DE,roughness:0.65,metalness:0.04});
+const cream2=new THREE.MeshStandardMaterial({color:0xF5EAC8,roughness:0.6});
+const brass=new THREE.MeshStandardMaterial({color:0xD6B07A,roughness:0.32,metalness:0.65});
+function box(w,h,d,mat,x,y,z){const m=new THREE.Mesh(new THREE.BoxGeometry(w,h,d),mat);m.position.set(x,y,z);m.scale.y=0.001;m.position.y-=h/2;house.add(m);return m;}
+const base=box(4.6,0.5,3.2,brass,0,-0.7,0);const wallL=box(0.12,1.6,2.1,cream,-1.85,0,0);
+const wallR=box(0.12,1.6,2.1,cream,1.85,0,0);const wallB=box(3.8,1.6,0.12,cream,0,0,-1.05);
+const block1=box(1.2,0.95,1.0,cream2,-0.9,0,0.55);const block2=box(1.3,1.15,1.1,cream,1.0,0,0.45);
+const blockMid=box(0.9,0.7,0.9,cream2,-0.7,0,0.1);const roof=box(4.1,0.28,2.9,cream2,0,0,0);
+roof.scale.y=1;roof.position.y=4;
+const dustG=new THREE.BufferGeometry();const N=120;const p=new Float32Array(N*3);for(let i=0;i<N*3;i++)p[i]=(Math.random()-0.5)*9;
+dustG.setAttribute('position',new THREE.BufferAttribute(p,3));
+const dust=new THREE.Points(dustG,new THREE.PointsMaterial({color:0xFFD98A,size:0.055,transparent:true,opacity:0.75}));house.add(dust);
+const tl=gsap.timeline({scrollTrigger:{trigger:"#spacer",start:"top top",end:"bottom bottom",scrub:1.2,onUpdate:(s)=>{if(bar)bar.style.width=(s.progress*100)+"%";}}});
+tl.to(base.scale,{y:1,duration:1},0).to(base.position,{y:-0.45,duration:1},0)
+.to([wallL.scale,wallR.scale,wallB.scale],{y:1,duration:1.2,stagger:0.1},0.4)
+.to([wallL.position,wallR.position,wallB.position],{y:0.8,duration:1.2,stagger:0.1},0.4)
+.to([block1.scale,block2.scale,blockMid.scale],{y:1,duration:1,stagger:0.15},1.0)
+.to([block1.position,block2.position,blockMid.position],{y:0.55,duration:1,stagger:0.15},1.0)
+.to(roof.position,{y:1.75,duration:1.2},1.8).to(house.rotation,{y:Math.PI*0.15,duration:1},2.2);
+let mx=0;window.addEventListener('mousemove',e=>{mx=(e.clientX/window.innerWidth-0.5);});
+window.addEventListener('touchmove',e=>{if(e.touches[0])mx=(e.touches[0].clientX/window.innerWidth-0.5);},{passive:true});
+const render=()=>{requestAnimationFrame(render);house.rotation.y+=(mx*0.5-house.rotation.y*0.01)*0.02;house.position.y=Math.sin(Date.now()*0.0005)*0.04;dust.rotation.y+=0.0008;camera.lookAt(0,0.6,0);renderer.render(scene,camera);};render();
+window.addEventListener('resize',()=>{const m=window.innerWidth<768;camera.aspect=window.innerWidth/window.innerHeight;if(m){camera.fov=50;camera.position.set(6.2,3.5,7.2);house.scale.set(0.72,0.72,0.72);}else{camera.fov=35;camera.position.set(5,2.6,5.2);house.scale.set(1,1,1);}camera.updateProjectionMatrix();renderer.setSize(window.innerWidth,window.innerHeight);});
+</script>
+</body>
+</html>
