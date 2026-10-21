@@ -6,7 +6,7 @@ A premium, luxury 3D scroll-storytelling landing page built for architects, inte
 
 ![AUREA Preview](https://img.shields.io/badge/Status-Production%20Ready-brightgreen) ![License](https://img.shields.io/badge/License-MIT-blue) ![Version](https://img.shields.io/badge/Version-2.0-gold) ![Single File](https://img.shields.io/badge/Bundle-Single%20File-black)
 
-**Live Demo:** `aurea.vercel.app` | **Bundle Size:** 7.8KB | **Dependencies:** 0 (CDN)
+**Live Demo: https://ktix-studio.github.io/Aurea/ | **Bundle Size:** 7.8KB | **Dependencies:** 0 (CDN)
 
 ---
 
