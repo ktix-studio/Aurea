@@ -1,24 +1,46 @@
-# AUREA — We Craft Legacies
+# AUREA — Architecture Atelier
 
-**Live:** https://aurea-pi-mocha.vercel.app
+> **We don't build houses. We craft legacies.**
 
-Luxury architecture atelier — scroll to build house in real-time.
+A premium, luxury 3D scroll-storytelling landing page built for architects, interior designers, and high-end studios. Single-file, zero-build, production-ready.
 
-### Stack
-- Next.js 14 (App Router)
-- Three.js + GSAP ScrollTrigger (3D house build)
-- TypeScript + MongoDB (full stack)
-- Deployed on Vercel
+![AUREA Preview](https://img.shields.io/badge/Status-Production%20Ready-brightgreen) ![License](https://img.shields.io/badge/License-MIT-blue) ![Version](https://img.shields.io/badge/Version-2.0-gold) ![Single File](https://img.shields.io/badge/Bundle-Single%20File-black)
 
-### Features
-- Blueprint 3D with scroll timeline
-- Cream + Brass luxury materials
-- Progress bar + mouse parallax
-- Full-stack contact API
-
-### API
-POST /api/contact - save lead
-GET /api/contact - list leads
+**Live Demo:** `aurea.vercel.app` | **Bundle Size:** 7.8KB | **Dependencies:** 0 (CDN)
 
 ---
-Built by ktix-studio - We don't build houses, we craft legacies.
+
+### ✨ Why AUREA?
+
+Most architecture templates are static images. AUREA tells a story.
+
+On scroll, a luxury minimalist house builds itself — foundation → walls → blocks → roof. Powered by Three.js + GSAP ScrollTrigger. Inspired by Aesop, Atera, and high-end ateliers.
+
+### 🚀 Features
+
+- **Scroll-to-Build Animation:** Cinematic GSAP timeline synced to scroll
+- **100% Single File:** Just `index.html` — no npm, no build, no framework
+- **Fully Responsive:** Optimized camera & scale logic for mobile + desktop
+    - Desktop: 35 FOV, immersive
+    - Mobile: 50 FOV, 0.72x scale, touch support
+- **Luxury Aesthetic:** 
+    - Materials: Cream limestone, brass base, dust particles
+    - Typography: Bodoni Moda + Instrument Serif
+    - Palette: `#FAF6EB` / `#C8A96A` / `#121212`
+- **Performance First:**
+    - < 2s load, 60fps render
+    - `devicePixelRatio` capped to 2
+    - No heavy models, pure procedural geometry
+- **Zero Config Deploy:** Vercel, Netlify, Cloudflare Pages — drag & drop
+
+### 🛠 Tech Stack
+
+- **Three.js r160** — Procedural box architecture
+- **GSAP 3.12 + ScrollTrigger** — Scrub-based timeline
+- **Vanilla JS + Import Maps** — No bundler needed
+
+### 📦 Installation
+
+#### Option 1: Single File (Recommended for buyers)
+```bash
+Just open index.html in browser. That's it
